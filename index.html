@@ -571,12 +571,7 @@ function listenToConvos(){
     const loads=Object.keys(data).map(async cid=>{
       try{
         const cs=await get(ref(db,`convos/${cid}`));
-        if (cs.exists()) {
-  convosCache[cid] = {
-    ...cs.val(),
-    id: cid
-  };
-}
+        if(cs.exists())convosCache[cid]={...cs.val(),id:cid};
       }catch(e){}
     });
     await Promise.all(loads);
@@ -924,9 +919,7 @@ window.addEventListener('load',async()=>{
   document.getElementById('step-auth').classList.add('active');
   app=initializeApp({databaseURL:HARDCODED_FB_URL});
   db=getDatabase(app);
-  localStorage.getItem(SESSION)
-  localStorage.setItem(SESSION, ...)
-  localStorage.removeItem(SESSION)
+  const saved=sessionStorage.getItem(SESSION);
   if(saved){
     try{
       const {username}=JSON.parse(saved);
