@@ -420,7 +420,8 @@ import { getDatabase, ref, set, get, push, onValue, off, update, serverTimestamp
 const COLORS = ['#534AB7','#0F6E56','#993C1D','#993556','#185FA5','#3B6D11','#854F0B','#A32D2D'];
 const SESSION = 'mm_session_v2';
 const FB_URL_KEY = "mm_fb_url";
-const HARDCODED_FB_URL = "https://markmessenger-61050-default-rtdb.firebaseio.com";
+const HARDCODED_FB_URL =
+  "https://markmessenger-61050-default-rtdb.europe-west1.firebasedatabase.app";
 
 let db = null, app = null;
 let currentUser = null;
@@ -916,6 +917,22 @@ window.addEventListener('load',async()=>{
   // Skip firebase setup step, go straight to auth
   document.getElementById('step-firebase').classList.remove('active');
   document.getElementById('step-auth').classList.add('active');
+
+  //debug logs
+  async function register() {
+    console.log("Register clicked");
+
+    try {
+        console.log("Before Firebase call");
+
+        const snap = await get(ref(db, `users/${u}`));
+
+        console.log("After Firebase call");
+
+    } catch (e) {
+        console.error("Register error:", e);
+    }
+}
 });
 </script>
 </body>
